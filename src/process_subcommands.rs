@@ -21,6 +21,7 @@ use crate::find::find_missing_editions_process;
 use crate::mint::{mint_editions, mint_list, mint_missing_editions, mint_one};
 use crate::opt::*;
 use crate::parse::{parse_errors_code, parse_errors_file};
+use crate::read_api::get_assets_by_creator;
 use crate::sign::{sign_all, sign_one};
 use crate::snapshot::{
     snapshot_cm_accounts, snapshot_holders, snapshot_indexed_holders, snapshot_indexed_mints,
@@ -531,6 +532,9 @@ pub async fn process_snapshot(client: &RpcClient, commands: SnapshotSubcommands)
             creator,
             output,
         } => snapshot_indexed_mints(indexer, api_key, &creator, output).await,
+        SnapshotSubcommands::NFTsByCreator { creator, output: _ } => {
+            get_assets_by_creator(&creator).await
+        }
     }
 }
 

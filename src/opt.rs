@@ -983,6 +983,17 @@ pub enum SnapshotSubcommands {
         #[structopt(short, long, default_value = ".")]
         output: String,
     },
+    /// Snapshot NFTs by creator from Metaplex Read API
+    #[structopt(name = "nfts-by-creator")]
+    NFTsByCreator {
+        /// Creator to filter accounts by
+        #[structopt(short, long)]
+        creator: String,
+
+        /// Path to directory to save output file
+        #[structopt(short, long, default_value = ".")]
+        output: String,
+    },
 }
 
 #[derive(Debug, StructOpt)]
